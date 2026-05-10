@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shakthivel - Portfolio</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        line-height: 1.6;
+      }
+
+      .hero {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          ),
+          url("black-laptop-screen-dark-room-night.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+
+      .hero-content {
+        z-index: 3;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .hero::after {
+        content: "Frontend · Backend · APIs · Automation · Cloud · Data";
+        position: absolute;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .hero h1 {
+        font-family: "Press Start 2P", cursive;
+        font-size: 3rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        letter-spacing: 0.12em;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        opacity: 0.9;
+      }
+
+      .hero-subtitle {
+        font-size: 1.05rem;
+        max-width: 680px;
+        margin: 0 auto;
+        opacity: 0.8;
+        line-height: 1.7;
+      }
+
+      .hero-caption {
+        font-size: 0.95rem;
+        opacity: 0.85;
+        margin-top: 1rem;
+        max-width: 680px;
+        color: #dcdcdc;
+        font-family: "Courier New", Courier, monospace;
+        min-height: 3rem;
+      }
+
+      .typing-cursor {
+        display: inline-block;
+        margin-left: 0.2rem;
+        animation: blink-cursor 1s steps(2, start) infinite;
+      }
+
+      @keyframes blink-cursor {
+        from,
+        to {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #e50914;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-btn {
+        background: #e50914;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .nav-btn:hover {
+        background: #b20710;
+      }
+
+      .section {
+        padding: 4rem 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: #e50914;
+        text-align: center;
+      }
+
+      .about-section {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        margin-bottom: 4rem;
+      }
+
+      .about-image {
+        flex: 1;
+        max-width: 400px;
+      }
+
+      .about-image img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .about-content {
+        flex: 2;
+      }
+
+      .about-content blockquote {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        font-style: italic;
+        margin-bottom: 2rem;
+        border-left: 4px solid #e50914;
+        padding-left: 2rem;
+      }
+
+      .experience-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .experience-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        padding: 2rem;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .experience-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        border-color: #e50914;
+      }
+
+      .experience-card h3 {
+        color: #e50914;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .experience-card p {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .experience-card ul {
+        margin-top: 1rem;
+        padding-left: 1.5rem;
+      }
+
+      .experience-card li {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      .contact-section {
+        text-align: center;
+      }
+
+      .contact-info {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        padding: 3rem;
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .contact-column {
+        text-align: left;
+      }
+
+      .contact-info p {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .contact-info a {
+        color: #e50914;
+        text-decoration: none;
+      }
+
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+
+      .download-btn {
+        display: inline-block;
+        margin-top: 1.2rem;
+        background: #e50914;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        padding: 0.6rem 1.2rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition:
+          background 0.3s,
+          color 0.3s;
+      }
+
+      .download-btn:hover {
+        background: #ffffff;
+        color: #e50914;
+      }
+
+      .video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .skip-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: transparent;
+        color: #fff;
+        border: 1px solid #e50914;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        z-index: 10000;
+      }
+
+      .skip-btn:hover {
+        background: #e50914;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        .about-section {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .nav-buttons {
+          gap: 1rem;
+        }
+
+        .nav-btn {
+          padding: 0.4rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="video-overlay" class="video-overlay">
+      <video autoplay muted onended="skipVideo()" playsinline>
+        <source src="netflixOpeningVideo.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <audio autoplay>
+        <source src="netflixOpeningAudio.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <button class="skip-btn" onclick="skipVideo()">Skip Intro</button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-container">
+        <div class="logo">Shakthivel</div>
+        <div class="nav-buttons">
+          <a href="#about" class="nav-btn">About Me</a>
+          <a href="#experience" class="nav-btn">Experience</a>
+          <a href="#projects" class="nav-btn">Projects</a>
+          <a href="#contact" class="nav-btn">Get in touch</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Shakthivel</h1>
+        <p class="hero-caption">
+          <span id="hero-typewriter"></span><span class="typing-cursor">|</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <div class="about-section">
+        <div class="about-image">
+          <img src="FHR59304.jpg" alt="Shakthivel" />
+        </div>
+        <div class="about-content">
+          <blockquote>
+            A full stack web developer with 7 years of experience in developing
+            and integrating front-end and back-end based web applications.
+            Specialized in Node.js and microservices architecture and expertise
+            in multiple programming languages, frameworks and tools.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <h2>Experience</h2>
+      <div class="experience-grid">
+        <div class="experience-card">
+          <h3>Application Developer</h3>
+          <p><strong>Company:</strong> ADP India Pvt Ltd</p>
+          <p><strong>Duration:</strong> Jun 2022 - Present</p>
+          <ul>
+            <li>
+              Created and optimized API's to fetch user specific details using
+              NodeJS ensuring business requirement coverage.
+            </li>
+            <li>
+              Optimized backend storage management using MySQL to reducing data
+              retrieval time by 30%.
+            </li>
+            <li>
+              Create data transformation scripts using GoLang to convert JSON
+              inputs to Arrays of objects.
+            </li>
+            <li>
+              Designed and developed code documents to perform CRUD
+              functionalities based on business requirements.
+            </li>
+            <li>
+              Developed an ETL process to read, parse and validate user uploaded
+              excel files against multiple criteria to implement automatic data
+              insertion into multiple system tables.
+            </li>
+            <li>
+              Integrate API's with Data contracts in Lifion tool which will
+              fetch the necessary output to be displayed for specified UX page.
+            </li>
+            <li>
+              Conduct End-to-End testing (UAT, Sandbox) and performance testing
+              to enhance UX and API standards, resulting to 20% reduction in
+              bugs.
+            </li>
+          </ul>
+        </div>
+
+        <div class="experience-card">
+          <h3>Product Software Engineer</h3>
+          <p><strong>Company:</strong> Wolters Kluwer</p>
+          <p><strong>Duration:</strong> 2021 - 2022</p>
+          <ul>
+            <li>
+              Integrated IBM Cognos Analytics with passport application and
+              developed Analytic reports with data's to provide insights and
+              reports of each module with timeframe differences.
+            </li>
+            <li>
+              Analyzed system flow and been a part of developing E-Docketing
+              system to provide users with events that organizes day to day work
+              based on priorities.
+            </li>
+            <li>
+              Oversaw the development and maintenance of associates in the team
+              by analyzing and approving the code changes and merging them with
+              the master release.
+            </li>
+            <li>
+              Assisted in providing high level and low level design and
+              solutions for complex code development and conduct scrum meetings
+              on creating development plans for each sprint.
+            </li>
+            <li>
+              Planned and Developed a new Full Stack Diversity Module
+              individually according to the Latest ABA guidelines which provides
+              diversity data information to legal service users to support with
+              providing diversity initiatives.
+            </li>
+          </ul>
+        </div>
+
+        <div class="experience-card">
+          <h3>Associate Product Software Engineer</h3>
+          <p><strong>Company:</strong> Wolters Kluwer</p>
+          <p><strong>Duration:</strong> 2020 - 2021</p>
+          <ul>
+            <li>
+              Presented an idea and worked towards developers taking
+              responsibilities of modules to mitigate the bugs and fixing them
+              to improving the stability of the module.
+            </li>
+            <li>
+              Develop functionality of resubmitting and adjusting invoice
+              details based on fees or expenses incurred for appealing an
+              invoice.
+            </li>
+            <li>
+              Worked on AI based integration development (Legal View Predictive
+              Insights) to perform automated selection of fields and rank the
+              best firms based on selected criteria.
+            </li>
+            <li>
+              Worked on end-to-end functionality of the product such as
+              analyzing, planning, developing and testing the functionalities
+              using Java.
+            </li>
+            <li>
+              Worked on production level bug fixes for the clients to stabilize
+              the user experience.
+            </li>
+            <li>
+              Created automation scripts to perform end to end automation
+              testing of every functionality which reduced product bugs from 70%
+              to 40%.
+            </li>
+          </ul>
+        </div>
+
+        <div class="experience-card">
+          <h3>Associate Consultant</h3>
+          <p><strong>Company:</strong> Logic Information Systems Pvt Ltd.</p>
+          <p><strong>Duration:</strong> 2018 - 2019</p>
+          <ul>
+            <li>
+              Design process integrations to perform CSV to Database and
+              Database to CSV conversion using Dell Boomi.
+            </li>
+            <li>
+              Develop data conversions to get data's from multiple tables and
+              join them to convert into XML formatted file using Dell Boomi.
+            </li>
+            <li>
+              Implemented PL/SQL scripts for maintaining data's in inventory
+              management domain.
+            </li>
+            <li>Worked on Web application development using Oracle ADF.</li>
+            <li>
+              Create tables in SQL loader as part of database creation for
+              integration.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <p style="text-align: center; font-size: 1.2rem; opacity: 0.8">
+        Coming Soon...
+      </p>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact Information</h2>
+      <div class="contact-info">
+        <div class="contact-column">
+          <p><strong>Mobile:</strong> +91 9094382896</p>
+          <p><strong>Email:</strong> shakthi5088@gmail.com</p>
+          <p>
+            <strong>Address:</strong> 1C, Sreshta Kishan, River view avenue,
+            Manapakkam, Chennai - 600 125
+          </p>
+        </div>
+        <div class="contact-column">
+          <p>
+            <strong>LinkedIn:</strong>
+            <a href="https://www.linkedin.com/in/shakthi-vel28/" target="_blank"
+              >View Profile</a
+            >
+          </p>
+          <p>
+            <strong>Resume:</strong>
+            <a href="Shakthivel Resume.pdf" target="_blank">Download Resume</a>
+          </p>
+          <p>
+            <strong>HackerRank:</strong>
+            <a href="https://www.hackerrank.com/shakthi5088" target="_blank"
+              >View Profile</a
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function skipVideo() {
+        const overlay = document.getElementById("video-overlay");
+        const audio = document.querySelector("audio");
+        if (audio) audio.pause();
+        overlay.style.display = "none";
+      }
+
+      // Ensure audio plays with video
+      const video = document.querySelector("video");
+      const audio = document.querySelector("audio");
+      if (video && audio) {
+        video.addEventListener("play", function () {
+          audio.play();
+        });
+        video.addEventListener("pause", function () {
+          audio.pause();
+        });
+        video.addEventListener("ended", function () {
+          audio.pause();
+        });
+      }
+
+      // Auto-hide after 60 seconds as fallback (adjust based on video length)
+      setTimeout(function () {
+        const overlay = document.getElementById("video-overlay");
+        if (overlay) {
+          overlay.style.display = "none";
+        }
+      }, 60000);
+
+      const typewriterText =
+        "Software engineering in action: designing systems, writing clean code, and powering digital products.";
+      const typewriterEl = document.getElementById("hero-typewriter");
+      let typeIndex = 0;
+
+      function typeWriter() {
+        if (typeIndex < typewriterText.length) {
+          typewriterEl.textContent += typewriterText.charAt(typeIndex);
+          typeIndex += 1;
+          setTimeout(typeWriter, 40);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", typeWriter);
+    </script>
+  </body>
+</html>
