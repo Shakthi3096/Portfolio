@@ -375,11 +375,19 @@
         <source src="netflixOpeningVideo.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <audio autoplay>
+      <audio autoplay preload="auto">
         <source src="netflixOpeningAudio.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       <button class="skip-btn" onclick="skipVideo()">Skip Intro</button>
+      <button
+        id="play-intro-sound"
+        class="skip-btn"
+        style="display: none"
+        type="button"
+      >
+        Play Intro Sound
+      </button>
     </div>
 
     <nav class="nav">
@@ -609,15 +617,31 @@
       // Ensure audio plays with video
       const video = document.querySelector("video");
       const audio = document.querySelector("audio");
+      const playIntroButton = document.getElementById("play-intro-sound");
+
       if (video && audio) {
         video.addEventListener("play", function () {
-          audio.play();
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(function () {
+              if (playIntroButton) {
+                playIntroButton.style.display = "inline-block";
+              }
+            });
+          }
         });
         video.addEventListener("pause", function () {
           audio.pause();
         });
         video.addEventListener("ended", function () {
           audio.pause();
+        });
+      }
+
+      if (audio && playIntroButton) {
+        playIntroButton.addEventListener("click", function () {
+          audio.play();
+          playIntroButton.style.display = "none";
         });
       }
 
